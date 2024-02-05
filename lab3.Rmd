@@ -1,0 +1,64 @@
+---
+title: "Lab 3: MATH 4753"
+author: "Your name"
+date: "January 28, 2019"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+    theme: spacelab
+    highlight: pygments
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Task 1
+
+WD
+
+```{r}
+getwd()
+```
+
+# Task 2
+
+```{r}
+spruce.df = read.csv("SPRUCE.csv")
+head(spruce.df)
+```
+
+# Task 3
+
+```{r}
+with(spruce.df,plot(BHDiameter,Height, main = "Height to diameter", pch = 21, bg = "blue", cex = 1.2,xlim = c(0,1.1*max(BHDiameter)), ylim = c(0,1.1*max(Height))))
+```
+While an argument could be made for a straight line relationship, a curve would fit more nicely.
+```{r}
+library(s20x)
+trendscatter()
+```
+
+  
+# Me
+
+```{r}
+obj = lm(Height~BHDiameter, data = spruce.df)
+summary(obj)
+plot(Height~BHDiameter, data = spruce.df)
+abline(obj)
+library(s20x)
+trendscatter(Height~BHDiameter,f=0.7, data=spruce.df)
+```
+
+
+
+#Task 7
+This is how you place images in RMD documents
+
+<center>
+!["name of image"](gheat.png){ width=70% }
+</center>
+
+
