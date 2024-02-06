@@ -41,21 +41,58 @@ layout(matrix(1:4,nr=2,nc=2,byrow=TRUE))
 with(spruce.df,trendscatter(BHDiameter, Height, f = 0.5))
 with(spruce.df,trendscatter(BHDiameter, Height, f = 0.6))
 with(spruce.df,trendscatter(BHDiameter, Height, f = 0.7))
-
-
 ```
+```{r}
+spruce.lm <- lm(Height~BHDiameter, data = spruce.df)
+summary(spruce.lm)
+plot(Height~BHDiameter, data = spruce.df)
+abline(obj)
+trendscatter(Height~BHDiameter,f=0.7, data=spruce.df)
+```
+A straight line works to an extent, but the curve fits the data much more nicely.
 
   
 # Me
 
 ```{r}
-obj = lm(Height~BHDiameter, data = spruce.df)
-summary(obj)
+spruce.lm = lm(Height~BHDiameter, data = spruce.df)
 plot(Height~BHDiameter, data = spruce.df)
-abline(obj)
+abline(spruce.lm)
 library(s20x)
 trendscatter(Height~BHDiameter,f=0.7, data=spruce.df)
 ```
+# Task 4
+
+```{r}
+layout(matrix(1:4,nr=2,nc=2,byrow=TRUE))
+with(spruce.df,plot(BHDiameter,Height, pch = 21, bg = "blue", cex = 1.2,xlim = c(0,1.1*max(BHDiameter)), ylim = c(0,1.1*max(Height))))
+abline(spruce.lm)
+
+with(spruce.df,plot(BHDiameter,Height, pch = 21, bg = "blue", cex = 1.2,xlim = c(0,1.1*max(BHDiameter)), ylim = c(0,1.1*max(Height))))
+abline(spruce.lm)
+with(spruce.df,{
+segments(BHDiameter,Height,BHDiameter,yhat)
+})
+
+
+with(spruce.df,plot(BHDiameter,Height, pch = 21, bg = "blue", cex = 1.2,xlim = c(0,1.1*max(BHDiameter)), ylim = c(0,1.1*max(Height))))
+abline(spruce.lm)
+abline(mean(spruce.df$Height),0)
+with(spruce.df, segments(BHDiameter,mean(Height),BHDiameter,yhat,col="Red"))
+
+with(spruce.df,plot(BHDiameter,Height, pch = 21,main = "Daniel Li's Plot", bg = "blue", cex = 1.2,xlim = c(0,1.1*max(BHDiameter)), ylim = c(0,1.1*max(Height))))
+abline(mean(spruce.df$Height),0)
+with(spruce.df, segments(BHDiameter,Height,BHDiameter,mean(Height),col="Green"))
+```
+
+```{r}
+yhat <- fitted(spruce.lm)
+MSS <- with(spruce.df,sum((yhat-mean(Height))^2))
+RSS <- with(spruce.df,sum((Height-yhat)^2))
+TSS <- with(spruce.df,sum((Height-mean(Height))^2))
+MSS/TSS
+```
+MSS/TSS is the ratio of mean sum
 
 
 
