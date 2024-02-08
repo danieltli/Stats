@@ -1,0 +1,47 @@
+---
+title: "Lab4"
+output: html_document:
+  toc: yes
+  toc_float: yes
+date: "2024-02-07"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Task 1
+```{r}
+getwd()
+```
+
+# Task 2
+```{r}
+spruce.df <- read.csv("SPRUCE.csv")
+tail(spruce.df)
+```
+
+#Task 3
+
+```{r}
+library(s20x)
+trendscatter(Height~BHDiameter, data =spruce.df, f = 0.5)
+spruce.lm <- with(spruce.df, lm(Height~BHDiameter))
+height.res <- residuals(spruce.lm)
+height.fit <- fitted(spruce.lm)
+plot(y = height.res, x = height.fit)
+trendscatter(y = height.res, x = height.fit)
+```
+
+In the original plot, the curve still stays increasing, but the slope gets smaller. In the next plot, however, we see a decrease in the curve's value, which is because we are using 2 different sets of data(Height vs BHDiameter and Residuals vs Fitted).
+
+```{r}
+plot(spruce.lm, which = 1)
+normcheck(spruce.lm, shapiro.wilk = TRUE)
+round(mean(height.res),4)
+```
+Since there is a P-value greater than .05, we are able to accept the NULL hypothesis and consider error distributed normally.
+Since the mean of the residual is 0, we know that it works better than the straight line model for prediction of the spruce height. We want to eliminate as much noise from the data as possible, and the straight line model leaves that in.
+
+#Task 4
+
