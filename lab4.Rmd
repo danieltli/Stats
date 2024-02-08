@@ -45,3 +45,7 @@ Since the mean of the residual is 0, we know that it works better than the strai
 
 #Task 4
 
+```{r}
+
+```
+
