@@ -120,53 +120,15 @@ g+ggtitle("Height Vs Diameter")
 
 
 # Task 7
-```{r slr, echo=FALSE}
-library(ggplot2)
-library(shiny)
-# DATA
-spruce.df = read.csv("SPRUCE.csv")#MS pg478
-fin.df = read.csv("FINTUBES.csv")
-
-# INPUTS
-inputPanel(
-  
-  
-  selectInput("plotg", "Choose plot type",
-      list(`points` = c("g", "gheat", "gratio"),
-           `point size` = c("gsheat", "gsratio")
-      )
-    )
-)
-
-renderPlot({
-  
- g = ggplot(fin.df, aes(x = RATIO, y = HEAT)) + geom_point() 
-
- gh = g + geom_point(aes(col = HEAT)) 
- 
- gr = g + geom_point(aes(col = RATIO)) 
- 
- gsh =  g + geom_point(aes(size = HEAT, col = HEAT))
- 
- gsr = g + geom_point(aes(size = RATIO, col = RATIO))
-  
- if(input$plotg == "g") print(g)
- 
- if(input$plotg == "gheat")   print(gh)
- 
- if(input$plotg == "gsratio")   print(gsr)
- 
- if(input$plotg == "gsheat")   print(gsh)
- 
- if(input$plotg == "gratio")   print(gr)
- 
-   
-})
-```
-This is how you place images in RMD documents
 
 <center>
-!["name of image"](gheat.png){ width=70% }
+!["Linear Regression"](Linear Regression.png){ width=80% }
+</center>
+<center>
+!["Points alone"](Points alone.png){ width = 80%}
+</center>
+<center>
+!["Points with line segments"](Points with line segments.png){ width = 80%}
 </center>
 
 
