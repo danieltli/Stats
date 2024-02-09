@@ -1,8 +1,9 @@
 ---
 title: "Lab4"
-output: html_document:
-  toc: yes
-  toc_float: yes
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
 date: "2024-02-07"
 ---
 
@@ -155,6 +156,33 @@ All of the residual data point(Min, Median, etc.) of quad2 are smaller than quad
 
 Cook's Distance plot predicted that by removing the 24th datum, the R^2 value would increase. It was correct, and both values have become larger.
 
+
 # Task 7
 
+Suppose for lines 1 and 2 we have the formulas:
 
+$l1: y = \beta_0 + \beta_1x$
+$l1: y = \beta_0 + \delta + (\beta_1+\zeta)x$
+
+At the change point the two lines intersect
+
+$\beta_0 + \beta_1x_k = \beta_0 + \delta + (\beta_1 + \zeta)x_k$
+
+After canceling, we can get
+
+$\delta = -\zeta x_k$
+
+We can then rewrite $l2$ as 
+
+$y = \beta_0 - \zeta x_k + (\beta_1 + \zeta)x$
+
+That is 
+
+$y = \beta_0 + \beta_1 x  + \zeta(x - x_k)I(x>x_k)$
+
+$l2$ is $l1$ with an adjustment term
+
+We then introduce an indicator function that will be 1 when $x > x_k$ and 0 else
+So we have
+
+$y = \beta_0 + \beta_1 x + \zeta(x = x_k)I(x>x_k) $
