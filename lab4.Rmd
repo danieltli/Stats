@@ -46,6 +46,95 @@ Since the mean of the residual is 0, we know that it works better than the strai
 #Task 4
 
 ```{r}
+quad.lm <- lm(Height~BHDiameter + I(BHDiameter^2), data = spruce.df)
+summary(quad.lm)
+```
+```{r}
+plot(spruce.df)
+myplot = function(x){
+  quad.lm$coefficients[1] + quad.lm$coefficients[2] *x + quad.lm$coefficients[3] * x ^2
+}
 
+curve(myplot,lwd = 2 , col= "steelblue", add = TRUE)
+
+quad.fit = fitted(quad.lm)
+plot(quad.lm, which = 1)
+normcheck(quad.lm, shapiro.wilk = TRUE)
+
+```
+Since the p-value is .684, higher than the previous one, we accept the NULL hypothesis. 
+
+We can see that the quadratic model better describes the data than the linear model.
+
+# Task 5
+
+```{r}
+summary(quad.lm)
+```
+
+𝛽0 = .860896
+𝛽1 = 1.469592
+𝛽2 = -.027457
+
+```{r}
+ciReg(quad.lm)
+```
+
+Fitted line equation : .860896 + 1.46959x - .027457x^2
+
+```{r}
+predict(quad.lm, data.frame(BHDiameter = c(15,18,20)))
+predict(spruce.lm, data.frame(BHDiameter = c(15,18,20)))
+```
+
+We can see that the predictions made by quad.lm are larger than the spruce.lm ones. 
+
+```{r}
+summary(spruce.lm)$r.squared
+summary(quad.lm)$adj.r.squared
+summary(spruce.lm)$adj.r.squared
+summary(quad.lm)$r.squared
+```
+R^2 = .6569146
+
+
+Adjusted R-squared refers to how well the model describes the data. We can see that the quadratic data adjusted for more variables performs better than the other ones by a large margin.
+
+Multiple R-squared describes how well data fits a particular model. It does not depend on the amount or effectiveness of included variables. 
+ 
+As we can see, quad.lm describes the variability in height better. The R-values of its adjusted and non-adjusted are both higher than spruce.lm
+
+```{r}
+anova(spruce.lm)
+```
+```{r}
+anova(quad.lm)
+```
+```{r}
+anova(spruce.lm,quad.lm)
+```
+
+Quad.lm fits the data better. It having the smallest RSS value makes it closer to the data than the others
+
+```{r}
+height.qfit <- fitted(quad.lm)
+
+TSS <- with(spruce.df, sum((Height - mean(Height))^2))
+MSS <- with(spruce.df, sum((height.qfit - mean(Height))^2))
+RSS <- with(spruce.df, sum((Height - height.qfit)^2))
+            
+TSS
+MSS
+RSS
+
+round(MSS/TSS,5)
+```
+
+The value of MSS/TSS is 0.77413.
+
+# Task 6
+
+```{r}
+cooks20x(quad.lm )
 ```
 
