@@ -135,6 +135,26 @@ The value of MSS/TSS is 0.77413.
 # Task 6
 
 ```{r}
-cooks20x(quad.lm )
+cooks20x(quad.lm)
 ```
+Cook's distance is a measure of how much the data would change if a point of the data was deleted. The farther away from the rest, the greater the value.
+
+It is used to determine outliers, or to prediect a new model without any heavy influences. 
+
+
+Looking at the graph, the 24th datum is the most influential, since it has the largest height distance value.
+
+```{r}
+quad2.lm <- lm(Height~BHDiameter + I(BHDiameter^2), data = spruce.df[-24,])
+summary(quad2.lm)
+```
+```{r}
+summary(quad.lm)
+```
+All of the residual data point(Min, Median, etc.) of quad2 are smaller than quad's residuals. Both R^2 values are also larger.
+
+Cook's Distance plot predicted that by removing the 24th datum, the R^2 value would increase. It was correct, and both values have become larger.
+
+# Task 7
+
 
