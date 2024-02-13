@@ -1,0 +1,19 @@
+---
+title: "lab5"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+date: "2024-02-13"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Task 1
+```{r}
+getwd()
+```
+# Task 2
+
