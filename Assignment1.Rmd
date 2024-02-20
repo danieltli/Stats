@@ -11,6 +11,8 @@ date: "2024-02-18"
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+Number of Questions completed: 14/15
 # Question 1
 
 Grading scale: Grade consists of labs, in class quizzes, exams, chapter quizzes, projects, assignments, and the final exam.
@@ -155,6 +157,174 @@ Legs ONLY
 
 ## 8d) 
 
+None: 0.1415
+Both: 0.0754717
+Legs ONLY: 0.5943396
+Wheels ONLY:0.1886792
+
+## 8e)
 
 
+```{r}
+pareto <- function(x, mn = "Pareto barplot", ...) {  # x is a vector
+  x.tab = table(x)
+  xx.tab = sort(x.tab, decreasing = TRUE, index.return = FALSE)
+  cumsum(as.vector(xx.tab)) -> cs
+  length(x.tab) -> lenx
+  bp <- barplot(xx.tab, ylim = c(0,max(cs)),las = 2)
+  lb <- seq(0,cs[lenx], l = 11)
+  axis(side = 4, at = lb, labels = paste(seq(0, 100, length = 11), "%", sep = ""), las = 1, line = -1, col = "Blue", col.axis = "Red")
+  for(i in 1:(lenx-1)){
+    segments(bp[i], cs[i], bp[i+1], cs[i+1], col = i, lwd = 2)
+  }
+  title(main = mn, ...)
+}
+dat <- rep(c("None", "Both", "Legs ONLY", "Wheels ONLY"),c(15,8,63,20) )
+pareto(dat, mn ="Relative frequencies of Robotic Limbs")
+```
+
+# Question 9
+
+## 9a)
+
+```{r}
+pie(c(6,8,22,3,11), labels = c("Denial of service", "Information Disclosure", "Remote Code 
+                               Execution", "Spoofing","Privilege elevation"), main = "Security
+    Issues in 2012")
+```
+Spoofing had the lowest proportion of security issues in 2012.
+
+## 9b)
+
+```{r}
+sect <- c("Denial of service", "Information Disclosure", "Remote Code 
+                              Execution", "Spoofing", "Privilege Elevation")
+sec = c(6,8,22,3,11)
+
+dat <- rep(sect,sec)
+pareto(dat, mn = "Securtiy issues in 2012")
+```
+
+# Question 10
+
+```{r}
+library(plotrix)
+swd <- read_excel("SWDEFECTS.xls")
+tab=table(swd$defect)
+rtab=tab/sum(tab)
+round(rtab,2)
+pie3D(rtab,labels=list("OK","Defective"),main="pie plot of SWD")
+```
+# Question 11
+
+## 11a)
+
+```{r}
+voltage <- read_excel("VOLTAGE.xls")
+head(voltage)
+```
+
+# Question 12
+
+```{r}
+prob <- c(1.72,2.50 ,2.16, 2.13, 1.06, 2.24, 2.31, 2.03, 1.09, 1.40,
+2.57, 2.64, 1.26, 2.05, 1.19, 2.13, 1.27, 1.51, 2.41, 1.95)
+quantile(prob, 0.025)
+quantile(prob, 0.975)
+
+```
+
+An interval in which 95% of the data will lie between is (1.07425,2.60675)
+
+
+# Question 13
+
+## 13a)
+
+```{r}
+mean(c(3,3,52,7,5,49,5,4,4,5,4))
+median(c(3,3,52,7,5,49,5,4,4,5,4))
+getmode <- function(v) {
+   uniqv <- unique(v)
+   uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+getmode(c(3,3,52,7,5,49,5,4,4,5,4))
+```
+mean:12.81818
+median:5
+mode: 5
+
+## 13b)
+
+While I would usually recommend mean, I believe that the median is a better fit here. The 52 and 49 are extreme outliers compared to the large majority.
+
+## 13c)
+
+```{r}
+mean(c(40,52,40,43,27))
+median(c(40,52,40,43,27))
+getmode(c(40,52,40,43,27))
+```
+
+Mean:40.4
+Median:40
+Mode:40
+
+## 13d)
+```{r}
+mean(c(40,52,40,43,27))
+median(c(40,52,40,43,27))
+getmode(c(30,16,30,56,22,14))
+```
+Mean:40.4
+Median:40
+Mode:30
+
+## 13e)
+
+Since both the medians and means are the same, the total plant coverage distribution is the same on a curve, but on a barplot, it would not be the same.
+
+# Question 14 
+
+# 14a)
+
+```{r}
+vec <- c(22922, 20210, 21911, 19225, 18792, 21993, 23059,
+20785 ,22781, 23303, 22192, 19462 ,19057, 23017,
+20186, 23292, 19408, 24909, 19866, 22891, 23121,
+19673 ,23261, 22796, 22355, 19807, 23432, 22625,
+22744 ,22426, 19111, 18933, 22417, 19595, 23408,
+22809, 19619 ,22738, 18499, 19130, 23220, 22647,
+22718, 22779, 19026, 22513, 19740, 22682, 19179,
+19404, 22193)
+plot(density(vec))
+```
+
+## 14b)
+
+Yes, it does seem to be supported. We have 2 different local maxima that have a significant difference.
+
+## 14c) 
+```{r}
+gala <- vec[vec <= 21000]
+galb <- vec[vec > 21000]
+mean(gala)
+mean(galb)
+sd(gala)
+sd(galb)
+```   
+A1775a mean and standard devation: 19462.24,532.2868.
+A1775b's mean and standard devation: 22838.47,560.9767.
+
+## 14d)
+
+It would be more likely to be in A1775A, since it falls within the range of local min and max of A1775A's cluster.
+
+# Question 15
+
+```{r}
+library(ggplot2)
+library(dplyr)
+ddt %>% filter(RIVER == "FCM" | RIVER == "LCM" | RIVER == "SCM" | RIVER == "TRM")  %>% ggplot(aes(x=RIVER ,y=LENGTH,fill= SPECIES)) + geom_boxplot() + ggtitle("Daniel Li")
+```
 
