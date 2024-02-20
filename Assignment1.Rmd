@@ -1,0 +1,160 @@
+---
+title: "ASS1"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+  
+date: "2024-02-18"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Question 1
+
+Grading scale: Grade consists of labs, in class quizzes, exams, chapter quizzes, projects, assignments, and the final exam.
+
+A is 90s and up. B is 80s. C is 60s and 70s. D is 50s and 60s. F is anything lower.
+
+# Question 2
+
+## 2a)
+
+```{r}
+ddt <- read.csv("DDT.csv")
+
+m=with(ddt, as.numeric(factor(MILE)))
+mcol=with(ddt,ifelse(MILE > 3, "green",
+                        ifelse(MILE < 3,"blue","green")))
+with(ddt,coplot(LENGTH~WEIGHT | (RIVER*SPECIES),pch = 21, col = MILE))
+```
+
+## 2b)
+Given a river FCM, LCM, and SCM, how will Length increase as a function of Weight?
+
+## 2c)
+It stores the MILE data from ddt into the variable m as a numeric type.
+
+## 2d)
+
+Finds how many unique values of m there are.
+
+## 2e)
+
+There are no LMBASS or SMBUFFALO in FCM, LCM, and SCM Rivers.
+
+## 2f)
+
+```{r}
+mean(ddt$SPECIES == "CCATFISH" & ddt$RIVER == "FCM")
+```
+The mean value of ddt found in the sample of CCATFISH in FCM river is  0.04166667
+
+
+# Question 3
+
+## 3a)
+
+Quantitative
+
+## 3b) 
+
+Quantitative
+
+## 3c) 
+
+Qualitative
+
+## 3d)
+
+Quantitative
+
+## 3e) 
+
+Qualitative
+
+## 3f)
+
+Quantitative
+
+## 3g)
+
+Qualitative
+
+# Question 4
+
+## 4a) 
+
+The four sampling designs are simple random sampling, stratified random sampling, cluster sampling, and systematic sampling.
+
+## 4b)
+
+Simple random sampling: Every individual data point of a set of data is randomly chosen, all with equal chance.
+
+Stratified random sampling: Stratify the data (separate data set into relevant subsets e.g by speed limit on a road) and then randomly sample.
+
+Cluster sampling: Sample multiple, related subsets of data rather than single points. For example, When examining average grocery prices of fruits, group brands of the same fruit into one sample.
+
+Systematic sampling: Systematically select samples by a given metric e.g every 3rd or every 5th point.
+
+# Question 5
+
+## 5a) i)
+
+```{r}
+mtbe <- read.csv("MTBE.csv")
+
+ind = sample(1:223,5, replace = FALSE)
+mtbe[ind,]
+mtbeo=na.omit(mtbe)
+```
+## 5a) ii) 
+```{r}
+depth=mtbeo[mtbeo$Aquifier=="Bedrock",]$Depth
+sd(depth)
+```
+# Question 6
+## 6a) i)
+
+```{r}
+library(readxl)
+eq <- read_excel("EARTHQUAKE.xls")
+ind = sample(1:2929,30, replace = FALSE)
+eq[ind,]
+plot(ts(eq$MAGNITUDE))
+with(eq,median(MAGNITUDE))
+```
+# Question 7
+
+## 7a)
+
+They used stratified random sampling to select samples from the rivers.
+
+## 7b)
+
+Fish in the Alabama river.
+
+## 7c)
+
+River, Species
+
+# Question 8 
+
+## 8a) 
+
+Bar graph 
+
+## 8b) 
+
+Number of robots 
+
+## 8c) 
+
+Legs ONLY
+
+## 8d) 
+
+
+
+
