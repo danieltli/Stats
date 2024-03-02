@@ -1,0 +1,284 @@
+---
+title: "lab6"
+output: html_document:
+  toc: yes
+  toc_float: yes
+date: "2024-02-28"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Task 1
+
+```{r}
+getwd()
+```
+
+# Task 2
+
+```{r}
+layout(matrix(1:4, nr=2,nc=2))
+curve(dnorm(x, mean=10,sd=4),xlim=c(-10,30))
+curve(dnorm(x, mean=10,sd=2),xlim=c(-10,30))
+curve(dnorm(x, mean=5,sd=10),xlim=c(-10,30))
+curve(dnorm(x, mean=5,sd= 1/2),xlim=c(-10,30))
+```
+
+```{r}
+curve(dnorm(x,0,1), xlim = c(-3, 3))
+
+xcurve = seq(2,3,length = 1000)
+ycurve = dnorm(xcurve, 0, 1)
+polygon(x = c(2,xcurve,3),y = c(0,ycurve,0),col = "Red")
+
+prob = 1- pnorm(2,0,1)
+prob2 <- round(prob,4)
+text(2.5, 0.1 ,paste0("Area = ", prob2))
+```
+```{r}
+curve(dnorm(x,4,2), xlim = c(4-3*2,4+3*2))
+
+xcurve = seq(1,5,length = 1000)
+ycurve = dnorm(xcurve, 4, 2)
+polygon(x = c(1,xcurve,5),y = c(0,ycurve,0),col = "Red")
+
+prob = pnorm(5,4,2) - pnorm(1,4,2)
+prob2 <- round(prob,4)
+text(3, 0.5*dnorm(3,mean,sd) ,paste0("Area = ", prob2))
+```
+
+```{r}
+curve(dnorm(x,10,4), xlim = c(10-3*4,10+3*4))
+
+xcurve = seq(10-3*4,10,length = 1000)
+ycurve = dnorm(xcurve, 10, 4)
+polygon(x = c(10-3*4,xcurve,10),y = c(0,ycurve,0),col = "Red")
+
+prob = pnorm(10,10,4)
+prob2 <- round(prob,4)
+text(6, 0.5*dnorm(6,10,4) ,paste0("Area = ", prob2))
+```
+```{r}
+curve(dnorm(x,-2,0.5), xlim = c(-2-3*0.5,-2+3*0.5))
+xcurve = seq(-3,-2,length = 1000)
+ycurve = dnorm(xcurve, -2, sd)
+polygon(x = c(-3,xcurve,-2),y = c(0,ycurve,0),col = "Red")
+
+prob = pnorm(-2,-2,0.5) - pnorm(-3,-2,0.5)
+prob2 <- round(prob,4)
+text(-2.5, 0.1 ,paste0("Area = ", prob2))
+```
+# Task 3
+
+```{r}
+curve(dgamma(x,shape=1,scale=1),xlim=c(0,10),ylim=c(0,1),col="Red",lwd=2,
+ylab="Gamma density", main="Beta=1")
+text(1.2,0.7,paste("alpha =",1))
+
+curve(dgamma(x,shape=3,scale=1),xlim=c(0,10),ylim=c(0,1),add=TRUE,lwd=2)
+text(2,0.32,paste("alpha =",3))
+
+curve(dgamma(x,shape=5,scale=1),xlim=c(0,10),ylim=c(0,1),add=TRUE, col="Blue",lwd=2)
+text(5,0.25,paste("alpha =",5))
+```
+
+```{r}
+curve(dgamma(x,3,2), xlim = c(0,3*2),ylab="Gamma density")
+
+xcurve = seq(2,5,length = 1000)
+ycurve = dgamma(xcurve, 3, 2)
+polygon(x = c(2,xcurve,5),y = c(0,ycurve,0),col = "Red")
+
+prob = pgamma(5,3,2) - pgamma(2,3,2)
+prob2 <- round(prob,4)
+text(2.7, 0.5*dgamma(3,3,2),paste0("Area = ", prob2))
+```
+
+```{r}
+curve(dgamma(x,6,3), xlim = c(0,3*3),ylab="Gamma density")
+
+xcurve = seq(1,4,length = 1000)
+ycurve = dgamma(xcurve, 6, 3)
+polygon(x = c(1,xcurve,4),y = c(0,ycurve,0),col = "Red")
+
+prob = pgamma(4,6,3)- pgamma(1,6,3)
+prob2 <- round(prob,4)
+text(2, 0.45*dgamma(2,6,3),paste0("Area = ", prob2))
+```
+
+```{r}
+curve(dgamma(x,2,4), xlim = c(0,5),ylab="Gamma density")
+
+xcurve = seq(3,6,length = 1000)
+ycurve = dgamma(xcurve, 2, 4)
+polygon(x = c(3,xcurve,6),y = c(0,ycurve,0),col = "Red")
+
+prob = pgamma(6,2,4) - pgamma(3,2,4)
+prob2 <- round(prob,4)
+text(4, 0.15,paste0("Area = ", prob2))
+```
+
+# Task 4
+
+```{r}
+layout(matrix(1:4, nr=2,nc=2))
+curve(dchisq(x,df=1),xlim=c(0,5),ylim=c(0,1.5),col="Red",lwd=2,
+ylab="Chisq density", main="df=1")
+
+curve(dchisq(x,df=2),xlim=c(0,5),ylim=c(0,0.75),col="Blue",lwd=2,
+ylab="Chisq density", main="df=2")
+
+curve(dchisq(x,df=4),xlim=c(0,10),ylim=c(0,0.25),col="Green",lwd=2,
+ylab="Chisq density", main="df=4")
+
+curve(dchisq(x,df=20),xlim=c(0,40),ylim=c(0,0.10),col="Black",lwd=2,
+ylab="Chisq density", main="df=20")
+```
+```{r}
+curve(dchisq(x,2), xlim = c(0,6), ylim = c(0,0.6), ylab="Chisq density", main="df=2")
+
+xcurve = seq(2,4,length = 1000)
+ycurve = dchisq(xcurve, 2)
+polygon(x = c(2,xcurve,4),y = c(0,ycurve,0),col = "Red")
+
+prob = pchisq(4,2) - pchisq(2,2)
+prob2 <- round(prob,4)
+text(3, 0.5*dchisq(3,2),paste0("Area = ", prob2))
+```
+
+```{r}
+
+curve(dchisq(x,3), xlim = c(0,10), ylab="Chisq density", main="df=3")
+
+xcurve = seq(3,5,length = 1000)
+ycurve = dchisq(xcurve, 3)
+polygon(x = c(3,xcurve,5),y = c(0,ycurve,0),col = "Red")
+
+prob = pchisq(5,3) - pchisq(3,3)
+prob2 <- round(prob,4)
+text(4, 0.5*dchisq(4,3),paste0("Area = ", prob2))
+```
+```{r}
+curve(dchisq(x,20), xlim = c(0,45), ylab="Chisq density", main="df=20")
+
+xcurve = seq(10,21,length = 1000)
+ycurve = dchisq(xcurve, 20)
+polygon(x = c(10,xcurve,21),y = c(0,ycurve,0),col = "Red")
+
+prob = pchisq(21,20) - pchisq(10,20)
+prob2 <- round(prob,4)
+text(16, 0.5*dchisq(15,20),paste0("Area = ", prob2))
+```
+
+# Task 5
+
+```{r}
+layout(matrix(1:4, nr=2,nc=2))
+curve(dweibull(x,1,1),xlim=c(0,5),ylim=c(0,1.5),col="Red",lwd=2,
+ylab="Weibull density")
+curve(dweibull(x,2,2),xlim=c(0,5),ylim=c(0,1.5),col="Blue",lwd=2,
+ylab="Weibull density")
+curve(dweibull(x,3,3),xlim=c(0,5),ylim=c(0,1.5),col="Green",lwd=2,
+ylab="Weibull density")
+curve(dweibull(x,4,2),xlim=c(0,5),ylim=c(0,1.5),col="Black",lwd=2,
+ylab="Weibull density")
+
+```
+```{r}
+shape = 6
+scale = 3
+curve(dweibull(x,shape,scale), xlim = c(0,5),ylab="Weibull density")
+
+xcurve = seq(2,4,length = 1000)
+ycurve = dweibull(xcurve, shape, scale)
+polygon(x = c(2,xcurve,4),y = c(0,ycurve,0),col = "Red")
+
+prob = pweibull(4,shape,scale) - pweibull(2,shape,scale)
+prob2 <- round(prob,4)
+text(2.9, 0.5*dweibull(2.9,shape,scale),paste0("Area = ", prob2))
+
+shape = 6
+scale = 3
+curve(dweibull(x,shape,scale), xlim = c(0,5),ylab="Weibull density")
+
+xcurve = seq(2,4,length = 1000)
+ycurve = dweibull(xcurve, shape, scale)
+polygon(x = c(2,xcurve,4),y = c(0,ycurve,0),col = "Red")
+
+prob = pweibull(4,shape,scale) - pweibull(2,shape,scale)
+prob2 <- round(prob,4)
+text(2.9, 0.5*dweibull(2.9,shape,scale),paste0("Area = ", prob2))
+
+shape = 2
+scale = 4
+curve(dweibull(x,shape,scale), xlim = c(0,10),ylab="Weibull density")
+
+xcurve = seq(3,6,length = 1000)
+ycurve = dweibull(xcurve, shape, scale)
+polygon(x = c(3,xcurve,6),y = c(0,ycurve,0),col = "Red")
+
+prob = pweibull(6,shape,scale) - pweibull(3,shape,scale)
+prob2 <- round(prob,4)
+text(4.5, 0.5*dweibull(4.5,shape,scale),paste0("Area = ", prob2))
+```
+# Task 6
+
+```{r}
+layout(matrix(1:4, nr=2,nc=2))
+curve(dbeta(x,shape1=1,shape2=1),xlim=c(0,2),ylim=c(0,2),col="Red",lwd=2,
+ylab="Beta density")
+curve(dbeta(x,2,2),xlim=c(0,2),ylim=c(0,2),col="Blue",lwd=2,
+ylab="Beta density")
+curve(dbeta(x,3,3),xlim=c(0,2),ylim=c(0,2),col="Green",lwd=2,
+ylab="beta density")
+curve(dbeta(x,4,2),xlim=c(0,2),ylim=c(0,2),col="Black",lwd=2,
+ylab="Beta density")
+```
+
+```{r}
+shape1 = 3
+shape2 = 1
+curve(dbeta(x,shape1,shape2), xlim = c(0,1.2),ylab="Beta density")
+
+xcurve = seq(0.5,0.75,length = 1000)
+ycurve = dbeta(xcurve, shape1, shape2,)
+polygon(x = c(0.5,xcurve,0.75),y = c(0,ycurve,0),col = "Red")
+
+prob = pbeta(0.75,shape1,shape2) - pbeta(0.5,shape1,shape2)
+prob2 <- round(prob,4)
+text(0.625, 0.5*dbeta(0.625,shape1,shape2),paste0("Area = ", prob2))
+```
+```{r}
+shape1 = 2
+shape2 = 4
+curve(dbeta(x,shape1,shape2), xlim = c(0,1),ylab="Beta density")
+xcurve = seq(0.4,1,length = 1000)
+ycurve = dbeta(xcurve, shape1, shape2)
+polygon(x = c(0.4,xcurve,1),y = c(0,ycurve,0),col = "Red")
+
+prob = pbeta(1,shape1,shape2) - pbeta(0.4,shape1,shape2)
+prob2 <- round(prob,4)
+text(0.5, 0.5*dbeta(0.5,shape1,shape2),paste0("Area = ", prob2))
+```
+```{r}
+shape1 = 6
+shape2 = 3
+curve(dbeta(x,shape1,shape2), xlim = c(0,1),ylab="Beta density")
+
+xcurve = seq(0,0.8,length = 1000)
+ycurve = dbeta(xcurve, shape1, shape2)
+polygon(x = c(0,xcurve,0.8),y = c(0,ycurve,0),col = "Red")
+
+prob = pbeta(.8,shape1,shape2) - pbeta(0,shape1,shape2)
+prob2 <- round(prob,4)
+text(0.6, 0.5*dbeta(0.6,shape1,shape2),paste0("Area = ", prob2))
+```
+# Task 7
+
+```{r}
+library(DANIELLI4753)
+myncurve(10,5,6)
+```
+
