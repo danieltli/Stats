@@ -1,0 +1,121 @@
+---
+title: 'Ass 2'
+author: "Daniel Li"
+date: '`r format(Sys.Date(),format="%A, %B %d, %Y")`'
+output: 
+  html_document:
+    df_print: paged
+    fig_caption: true
+    highlights: pygments
+    number_sections: no
+    theme: spacelab
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE, fig.align='center'}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Question 1
+
+## a)
+
+Given a match, the probability of an expert failing to identify a match is 1-0.9212 = 0.0788
+
+## b)
+
+Given a match, the probability of a novice failing to identify a match is 1 - 0.7455 = 0.2545
+
+## c)
+
+Using Bayes' theorem, we can conclude the participant is more likely to be a novice. P(expert|fail) = ((1-.92) * .92)/P(fail), P(novice) = ((1-.75) *.75)/fail.
+Even without solving for P(fail), we can see that P(expert|fail) is lower.
+
+# Question 2
+
+## a)
+
+P(Positive|Doping) = ((50/59)*(59/1000)/.1 = 0.5 or 50 percent
+
+## b)
+
+P(Negative|Nonuser) = 891/941 = .94685 or about 95 percent
+
+## c)
+
+P(Doping|Positive) = (P(P|D) * P(P))/(P(P|D)* P(P) + P(P|Non) * P(Non)) = (0.5* 0.1)/((0.5 * 0.1) + 0.01 * .9) = 0.8475 or about 85 percent.
+
+
+
+# Question 7
+
+## a)
+
+.09 + 0.3 + 0.37 + 0.2 + 0.04 = 1 
+
+## b) 
+
+$P(3 U 4)$ = 0.2 + 0.4 = 0.24
+
+## c 
+
+$P(0 U 1)$ = 0.09 + 0.3 = 0.39
+
+
+# Question 8
+
+## a)
+
+We can sum up p(y) to make sure it goes to 1
+
+```{r}
+.17 + .10 + .11 + .11 + .1 + .1 + 0.07 + 0.05 + 0.03 + 0.02 + 0.02 + 0.02 + 0.02 + 0.02 + 0.01 + 0.01 + 0.01 + 0.01 + 0.01 + 0.005 + 0.005
+```
+p(y) is also defined for all y
+
+## b)
+
+P(y >= 10) = 0.02 + 0.02 + 0.02 + 0.02 + 0.05 + 0.01 = 0.14
+
+## c) 
+
+mean = $\mu = \Sigma yp(y)$ = 1* .10 + 2 * .11 +  3 * .11 + 4 *  .10 + 5 * .10 + 6 * .07 + 7 * .05 + 8 * .03 + 9 * .02 + 10 * .02 + 11 * .02 +  12 *  .02 + 13 * .02 + 14 * .01 + 15 * .01 + 16 * .01 + 
+17 * .01 + 18 * .01 + 19 * .005 + 20 .005
+
+= 4.475
+
+variance = $\sigma^2 = E(y-\mu)^2p(y) $ =  19.608616
+
+## d)
+
+An interval that wil contain at least .75 of the probability is [1,20]
+
+# Question 9
+
+## a)
+
+```{r}
+dbinom(10, size = 25, prob = 0.7)
+```
+
+## b)
+
+```{r}
+pbinom(c(5), size = 25, prob = 0.7)
+```
+
+## c)
+
+mean = 25 * .7 = 17.75
+
+sd = sqrt(17.75*(1-.7)) = 2.3
+
+## d) 
+
+It means that, on average, there are about 17.75 foreign nationals that have a PhD in engineering in 25 PhDs, and that in most trials, that number will usually be higher or lower by 2.3.
+
+## Question 10
+
+## a)
+
