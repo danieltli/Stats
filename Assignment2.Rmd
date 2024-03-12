@@ -119,3 +119,14 @@ It means that, on average, there are about 17.75 foreign nationals that have a P
 
 ## a)
 
+```{r}
+
+dmultinom(rep(5, 10), size = 50, rep(1/10,10))
+
+```
+## b)
+
+```{r}
+dbinom(0, size = 50, prob = 1/10) + dbinom(1, size = 50, prob = 1/10)
+```
+
