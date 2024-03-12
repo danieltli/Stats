@@ -129,4 +129,27 @@ dmultinom(rep(5, 10), size = 50, rep(1/10,10))
 ```{r}
 dbinom(0, size = 50, prob = 1/10) + dbinom(1, size = 50, prob = 1/10)
 ```
+# Question 11
+
+## a)
+
+This is a geometric distribution, with formula $P(Y = K) = (1-.4)^(k-1) * .4$
+
+## b)
+
+E(Y) = 1/p  = 1/.40 = 2.5. It represents how many customers you are expected to interview before finding someone who did not cite the packaging or the label mark as the reason.
+
+## c)
+
+
+```{r}
+(1 - .4)^(1 - 1) * .4
+```
+## d)
+
+```{r}
+1 - pgeom(2, prob = .4)
+```
+
+
 
