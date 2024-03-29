@@ -256,3 +256,10 @@ mycltp(10,10000,10)
 mycltp(20,10000,10)
 ```
 
+# Task 6
+
+```{r}
+library(MATH4753DANIEL24)
+myclt(10,20000)
+```
+
